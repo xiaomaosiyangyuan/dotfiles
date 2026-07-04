@@ -67,7 +67,7 @@ Register-ScheduledTask -TaskName "ClashVerge-DNSFix" -Action $dnsAction -Trigger
 Write-Host "=== 6/6: 部署文件改动自动推送 ===" -ForegroundColor Cyan
 # 安装 watcher 开机自启
 $watchScript = "$dotfiles\git-watch.ps1"
-$watchAction = New-ScheduledTaskAction -Execute "powershell.exe" -Argument "-NoProfile -ExecutionPolicy Bypypass -WindowStyle Hidden -File `"$watchScript`""
+$watchAction = New-ScheduledTaskAction -Execute "powershell.exe" -Argument "-NoProfile -ExecutionPolicy Bypass -WindowStyle Hidden -File `"$watchScript`""
 $logonTrigger = New-ScheduledTaskTrigger -AtLogOn
 Register-ScheduledTask -TaskName "Dotfiles-AutoWatch" -Action $watchAction -Trigger $logonTrigger -Settings $pullSettings -Force
 
