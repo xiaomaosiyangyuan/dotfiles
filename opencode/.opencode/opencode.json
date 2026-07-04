@@ -1,0 +1,66 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "permission": {
+    "*": "allow",
+    "tool": "allow",
+    "bash": "allow",
+    "read": "allow",
+    "write": "allow",
+    "edit": "allow",
+    "browser": "allow"
+  },
+  "provider": {
+    "9router": {
+      "npm": "@ai-sdk/openai-compatible",
+      "options": {
+        "apiKey": "$env:9ROUTER_API_KEY",
+        "baseURL": "http://localhost:20128/v1"
+      },
+      "models": {
+        "zong": {
+          "name": "Zong Combo (sensenova->glm->agnes)"
+        },
+        "sensenova": {
+          "name": "SenseNova Combo"
+        },
+        "sensenova-1": {
+          "name": "DeepSeek V4 Flash (Key1)"
+        },
+        "sensenova-2": {
+          "name": "DeepSeek V4 Flash (Key2)"
+        },
+        "glm-1": {
+          "name": "GLM-4.7"
+        },
+        "anges-1": {
+          "name": "Agnes 2.0 Flash"
+        }
+      }
+    }
+  },
+  "mcp": {
+    "desktop_cu": {
+      "enabled": false
+    },
+    "browser_agent": {
+      "type": "local",
+      "command": [
+        "python",
+        "-m",
+        "browser_use.mcp"
+      ],
+      "env": {
+        "OPENAI_API_KEY": "$env:9ROUTER_API_KEY",
+        "OPENAI_BASE_URL": "http://localhost:20128/v1",
+        "BROWSER_USE_LLM_MODEL": "zong",
+        "ANONYMIZED_TELEMETRY": "false"
+      },
+      "enabled": true
+    }
+  },
+  "tools": {
+    "desktop_cu_*": false
+  },
+  "model": "9router/zong",
+  "small_model": "9router/glm-1"
+}

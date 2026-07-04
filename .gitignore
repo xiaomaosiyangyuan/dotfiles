@@ -1,0 +1,22 @@
+# Node modules (too large, installed via npm)
+node_modules/
+__pycache__/
+*.pyc
+
+# Runtime data
+*.sqlite
+*.sqlite-shm
+*.sqlite-wal
+state.json
+
+# Sensitive - machine-specific
+jwt-secret
+machine-id
+cli-secret
+
+# Large binaries
+cloudflared.exe
+
+# OS files
+.DS_Store
+Thumbs.db

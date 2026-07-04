@@ -1,0 +1,115 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+
+  "plugin": ["@heimoshuiyu/opencode-goal-plugin"],
+
+  "provider": {
+    "agnes": {
+      "models": {
+        "agnes-2.0-flash": {
+          "maxTokens": 262144,
+          "name": "Agnes 2.0 Flash"
+        },
+        "agnes-image-2.1-flash": {
+          "maxTokens": 8192,
+          "name": "Agnes Image 2.1 Flash"
+        },
+        "agnes-video-v2.0": {
+          "maxTokens": 8192,
+          "name": "Agnes Video V2.0"
+        }
+      },
+      "npm": "@ai-sdk/openai-compatible",
+      "options": {
+        "apiKey": "$env:AGNES_API_KEY",
+        "baseURL": "https://apihub.agnes-ai.com/v1",
+        "setCacheKey": true
+      }
+    },
+    "modelscope": {
+      "models": {
+        "Qwen/Qwen3-235B-A22B-Instruct-2507": {
+          "maxTokens": 131072,
+          "name": "Qwen3-235B"
+        },
+        "Qwen/Qwen3.5-35B-A3B-Instruct": {
+          "maxTokens": 32768,
+          "name": "Qwen3.5-35B"
+        },
+        "ZhipuAI/glm-4.7-flash": {
+          "maxTokens": 131072,
+          "name": "GLM-4.7-Flash"
+        },
+        "deepseek-ai/DeepSeek-R1-0528": {
+          "maxTokens": 128000,
+          "name": "DeepSeek R1"
+        }
+      },
+      "npm": "@ai-sdk/openai-compatible",
+      "options": {
+        "apiKey": "$env:MODELSCOPE_API_KEY",
+        "baseURL": "https://api-inference.modelscope.cn/v1",
+        "setCacheKey": true
+      }
+    },
+    "sensenova": {
+      "models": {
+        "deepseek-v4-flash": {
+          "maxTokens": 1048576,
+          "name": "DeepSeek V4 Flash"
+        },
+        "sensenova-6.7-flash-lite": {
+          "maxTokens": 1048576,
+          "name": "SenseNova 6.7 Flash-Lite",
+          "attachment": true,
+          "tool_call": true,
+          "modalities": {
+            "input": ["text", "image"]
+          }
+        },
+        "sensenova-u1-fast": {
+          "maxTokens": 1048576,
+          "name": "SenseNova U1 Fast"
+        }
+      },
+      "npm": "@ai-sdk/openai-compatible",
+      "options": {
+        "apiKey": "$env:SENSENOVA_API_KEY",
+        "baseURL": "https://token.sensenova.cn/v1",
+        "setCacheKey": true
+      }
+    }
+  },
+  "instructions": [".opencode/instructions/cu-constraints.md"],
+  "experimental": {
+    "mcp_timeout": 120000
+  },
+  "mcp": {
+    "visible_browser": {
+      "type": "local",
+      "command": [
+        "python",
+        "$env:USERPROFILE\\.config\\opencode\\mcp\\playwright_mcp_server.py"
+      ],
+      "env": {
+        "PLAYWRIGHT_BROWSER": "msedge",
+        "PLAYWRIGHT_HEADLESS": "0",
+        "ANONYMIZED_TELEMETRY": "false"
+      },
+      "enabled": true
+    },
+    "playwright": {
+      "type": "local",
+      "command": [
+        "npx",
+        "-y",
+        "@playwright/mcp",
+        "--browser",
+        "msedge",
+        "--caps",
+        "vision"
+      ],
+      "enabled": true
+    }
+  }
+}
